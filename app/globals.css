@@ -1,28 +1,23 @@
-/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  /* 기본 배경색 */
-  background-color: #0A0820;
-  /* 텍스트 기본 색상을 부드러운 크림색으로 변경 */
-  color: #F8F8F2; 
+  background-color: #2D243F; /* 기본 배경색 */
+  color: #FFF9F0;
   margin: 0;
   padding: 0;
   
-  /* --- 핵심: 배경 텍스처 고정 --- */
-  /* 이미지가 있으면 이 이미지가 배경이 되고, 없으면 위 배경색이 나옵니다 */
+  /* 배경 텍스처 설정 */
   background-image: url('/images/sub-bg-texture.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* 스크롤해도 배경은 고정됨 */
-  /* 배경 이미지가 너무 밝으면 글씨가 안 보이므로 살짝 어둡게 눌러주는 가상 요소 */
+  background-attachment: fixed;
   position: relative;
 }
 
-/* 배경 어둡게 해주는 가상 레이어 */
+/* 텍스트 가독성을 위한 전체 오버레이 (배경 그림을 살짝 눌러줌) */
 body::before {
     content: '';
     position: fixed;
@@ -30,12 +25,17 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 8, 32, 0.7); /* cosmic-900 색상에 투명도 70% */
-    z-index: -1; /* 컨텐츠 뒤로 보냄 */
+    background: rgba(45, 36, 63, 0.6); /* cosmic-900 + 투명도 */
+    z-index: -1;
 }
 
+/* 별 떨어지는 애니메이션 */
+@keyframes fall {
+  0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+}
 
-/* (기존 스크롤 관련 CSS 유지) */
 .snap-container {
   height: 100vh;
   overflow-y: scroll;
@@ -50,36 +50,9 @@ body::before {
   position: relative;
   overflow: hidden;
   width: 100%;
-  /* 섹션 자체 배경색은 제거하여 뒤의 텍스처가 보이게 함 */
-  background-color: transparent; 
+  background-color: transparent; /* 배경 투명 (뒤에 texture 보이게) */
 }
 
-/* ... 나머지 scrollbar-hide 등 기존 CSS 유지 ... */
+/* 스크롤바 숨김 */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* app/globals.css 맨 아래에 추가 */
-
-/* 별이 떨어지는 애니메이션 */
-@keyframes fall {
-  0% {
-    transform: translateY(-10vh) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) translateX(20px); /* 아래로 떨어지면서 약간 오른쪽으로 이동 */
-    opacity: 0;
-  }
-}
-
-/* 반짝이는 효과 */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
