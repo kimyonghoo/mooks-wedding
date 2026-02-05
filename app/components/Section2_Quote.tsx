@@ -29,7 +29,7 @@ const Section2_Quote = () => {
         
         <div className="mt-12 pt-8 border-t border-white/10 space-y-3">
             <div className="flex justify-center items-center gap-3">
-                <span className="text-cream/60 text-xs">000 · 000 의 장남</span>
+                <span className="text-cream/60 text-xs">박남용 · 곽영희 의 장남</span>
                 <strong className="text-lg text-accent">박형묵</strong>
             </div>
             <div className="flex justify-center items-center gap-3">
