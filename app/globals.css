@@ -3,33 +3,27 @@
 @tailwind utilities;
 
 body {
-  background-color: #2D243F; /* 기본 배경색 */
+  background-color: #2D243F;
   color: #FFF9F0;
   margin: 0;
   padding: 0;
-  
-  /* 배경 텍스처 설정 */
   background-image: url('/images/sub-bg-texture.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
+  overflow: hidden; 
 }
 
-/* 텍스트 가독성을 위한 전체 오버레이 (배경 그림을 살짝 눌러줌) */
 body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(45, 36, 63, 0.6); /* cosmic-900 + 투명도 */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(45, 36, 63, 0.6);
     z-index: -1;
 }
 
-/* 별 떨어지는 애니메이션 */
 @keyframes fall {
   0% { transform: translateY(-10vh) translateX(0); opacity: 0; }
   10% { opacity: 0.8; }
@@ -37,22 +31,25 @@ body::before {
 }
 
 .snap-container {
-  height: 100vh;
+  height: 100dvh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
+.snap-container::-webkit-scrollbar { display: none; }
 
 .snap-section {
-  height: 100vh;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   scroll-snap-align: start;
+  scroll-snap-stop: always; /* 한 칸씩만 넘어가게 */
   position: relative;
   overflow: hidden;
   width: 100%;
-  background-color: transparent; /* 배경 투명 (뒤에 texture 보이게) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-/* 스크롤바 숨김 */
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
